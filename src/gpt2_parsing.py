@@ -89,7 +89,7 @@ def interact_model(
                     text = enc.decode(out[i])
                     yield text
 
-def parsing(input_file, output_file, encode=True):
+def parsing(input_file, output_file, encode=True, overwrite=False):
     prediction_list = interact_model(
         model_name='124M',
         seed=0,
@@ -101,6 +101,18 @@ def parsing(input_file, output_file, encode=True):
         top_p=1,
         models_dir='models',
     )
+
+    verb = "Encoding" if encode else "Decoding"
+    print(f"{verb} {input_file} to {output_file}")
+
+    if overwrite:
+        with open(output_file, 'w+') as f_out:
+            f_out.write('')
+    else:
+        import os
+        if output_file in os.listdir('.'):
+            return
+
     output = ""
     with open(input_file, 'r') as f_in:
         source = f_in.read()
@@ -137,7 +149,7 @@ def parsing(input_file, output_file, encode=True):
                             next(prediction_list)
                             prediction = prediction_list.send(prephrased).strip()
                             prephrased += ' ' + token
-                            if prediction == token or is_synonym(prediction, token):
+                            if prediction == token or synonyms.is_synonym(prediction, token):
                                 postphrased += ' ' + flag
                             else:
                                 postphrased += ' ' + token
