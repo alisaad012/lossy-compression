@@ -150,6 +150,8 @@ def parsing(input_file, output_file, encode=True, overwrite=False):
                             prediction = prediction_list.send(prephrased).strip()
                             prephrased += ' ' + token
                             if prediction == token or synonyms.is_synonym(prediction, token):
+                                # if synonyms.is_synonym(prediction, token) and prediction != token:
+                                #     print("syn:", token, prediction)
                                 postphrased += ' ' + flag
                             else:
                                 postphrased += ' ' + token
@@ -167,7 +169,7 @@ def parsing(input_file, output_file, encode=True, overwrite=False):
                     if i == len(parsed_source) // 2 - 1:
                         separator = separator[:-2] + '\n'
                     f_out.write(postphrased + separator)
-            pbar.update(1)
+                pbar.update(1)
 
 if __name__ == '__main__':
     fire.Fire(parsing)

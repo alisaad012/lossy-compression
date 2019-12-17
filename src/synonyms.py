@@ -1,7 +1,10 @@
+import os
+
 thesaurus = {}
 
 def setup():
-    with open('mobythes.aur', 'r') as f_in:
+    thesaurus_file = os.path.join(os.path.dirname(__file__), 'mobythes.aur')
+    with open(thesaurus_file, 'r') as f_in:
         lines = [set([word for word in line.split(',') if ' ' not in word]) for line in f_in.read().split('\n')]
     for line in lines:
         for word in line:
@@ -16,7 +19,7 @@ def clean(string):
     return ''.join(letters)
 
 def is_synonym(word1, word2):
-    if word2 in thesaurus[word1] or word1 in thesaurus[word2]:
+    if word2 in thesaurus.get(word1, []) or word1 in thesaurus.get(word2, []):
         return True
     return False
 
