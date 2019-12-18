@@ -38,6 +38,6 @@ python3 src/main.py samples/<text file>
 
 # Flow Chart
 GPT-2 Encoding
-![GPT-2 Encoding](samples/GPT-2_Encoding.png)
+![GPT-2 Encoding](images/GPT-2_Encoding.png)
 Arithmetic Coding
-![Arithmetic Coding](samples/Arithmetic_Coding.png)
+![Arithmetic Coding](images/Arithmetic_Coding.png)
