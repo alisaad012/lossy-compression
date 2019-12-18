@@ -35,3 +35,9 @@ To run the program
 ```
 python3 src/main.py samples/<text file>
 ```
+
+# Flow Chart
+GPT-2 Encoding
+![GPT-2 Encoding](samples/GPT-2 Encoding.png)
+Arithmetic Coding
+![Arithmetic Coding](samples/Arithmetic Coding.png)
